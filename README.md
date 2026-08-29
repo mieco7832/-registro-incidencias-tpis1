@@ -28,7 +28,6 @@ Reporta y da seguimiento a problemas de equipos, infraestructura o servicios.
 
 - [x] Configuración inicial del proyecto y estructura de carpetas.
 - [x] Archivos de configuración (Gradle) actualizados con las dependencias necesarias.
-- [x] Pantalla principal de incidencias
 
 ## Cómo abrir el proyecto en Android Studio
 1. Asegúrate de tener instalado Android Studio y Git.
