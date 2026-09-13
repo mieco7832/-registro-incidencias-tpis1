@@ -21,12 +21,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import sv.edu.utec.etps1.registroincidencias.R
 
 @Composable
 fun RegistroIncidenciasApp() {
+    
+    val mensajeInicial = stringResource(R.string.no_record)
+    val ctx = LocalContext.current
+
     var titulo by remember { mutableStateOf("") }
     var descripcion by remember { mutableStateOf("") }
-    var mensaje by remember { mutableStateOf("Aún no hay incidencias registradas.") }
+    var mensaje by remember { mutableStateOf( mensajeInicial )}
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -36,20 +43,19 @@ fun RegistroIncidenciasApp() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Registro de incidencias",
+                text = stringResource(R.string.title),
                 style = MaterialTheme.typography.headlineMedium
             )
             Spacer(modifier = Modifier.height(12.dp))
             Text(
-                text = "Reporta y da seguimiento a problemas de equipos, " +
-                        "infraestructura o servicios."
+                text = stringResource(R.string.sub_title)
             )
             Spacer(modifier = Modifier.height(24.dp))
             Box(modifier = Modifier.weight(1f)) {
                 Card(modifier = Modifier.fillMaxWidth()) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(
-                            text = "Estado inicial",
+                            text = stringResource(R.string.initial_state),
                             style = MaterialTheme.typography.titleMedium
                         )
                         Spacer(modifier = Modifier.height(8.dp))
@@ -62,7 +68,7 @@ fun RegistroIncidenciasApp() {
             OutlinedTextField(
                 value = titulo,
                 onValueChange = { titulo = it },
-                label = { Text("Título") },
+                label = { Text(stringResource(R.string.title_tag_value)) },
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(12.dp))
@@ -70,23 +76,23 @@ fun RegistroIncidenciasApp() {
             OutlinedTextField(
                 value = descripcion,
                 onValueChange = { descripcion = it },
-                label = { Text("Descripción") },
+                label = { Text(stringResource(R.string.description_tag_value)) },
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(24.dp))
             Button(
                 onClick = {
                     mensaje = if (titulo.isNotBlank())
-                        "Reporte preparado: $titulo"
+                        ctx.getString(R.string.prepared_report_label, titulo)
                     else
-                        "Ingrese un título válido"
+                        ctx.getString(R.string.invalid_report_label)
                 }
             ) {
-                Text(text = "Crear reporte")
+                Text(text = stringResource(R.string.make_report))
             }
         }
         Text(
-            text = "Version ${BuildConfig.VERSION_NAME}",
+            text = stringResource(R.string.version, BuildConfig.VERSION_NAME),
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(top = 16.dp),

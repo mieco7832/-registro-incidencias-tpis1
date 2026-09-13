@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">RegistroIncidencias</string>
+    <string name="no_record">Aún no hay incidencias registradas.</string>
+    <string name="title">Registro de incidencias</string>
+    <string name="sub_title">Reporta y da seguimiento a problemas de equipos, infraestructura o servicios.</string>
+    <string name="initial_state">Estado inicial</string>
+    <string name="title_tag_value">Título</string>
+    <string name="description_tag_value">Descripción</string>
+    <string name="prepared_report_label">Reporte preparado: %1$s</string>
+    <string name="invalid_report_label">Ingrese un título válido</string>
+    <string name="make_report">Crear reporte</string>
+    <string name="version">Version %1$s</string>
 </resources>
