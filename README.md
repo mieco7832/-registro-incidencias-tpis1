@@ -30,6 +30,7 @@ Reporta y da seguimiento a problemas de equipos, infraestructura o servicios.
 - [x] Archivos de configuración (Gradle) actualizados con las dependencias necesarias.
 - [x] Pantalla inicial.
 - [x] Componentes para captura de texto `titulo` y `descripcion`.
+- [x] Archivo de `String.xml` implementando logica de constantes
 
 ## Cómo abrir el proyecto en Android Studio
 
