@@ -73,7 +73,8 @@ fun RegistroIncidenciasApp() {
                     }
                 }
             }
-
+            Spacer(modifier = Modifier.height(24.dp))
+            AcelerometroCard()
             Spacer(modifier = Modifier.height(24.dp))
 
             OutlinedTextField(
