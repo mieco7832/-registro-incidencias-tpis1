@@ -33,6 +33,7 @@ Reporta y da seguimiento a problemas de equipos, infraestructura o servicios.
 - [x] Componente para prioridad y mensaje de retroalimentación.
 - [x] Teclado contextual.
 - [x] Integracion de Acelerometro con estado.
+- [x] Se agrego sensor para magnitud
 - [x] Archivo de `String.xml` implementando logica de constantes
 
 ## Cómo abrir el proyecto en Android Studio

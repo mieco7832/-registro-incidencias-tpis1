@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import kotlin.math.abs
 import kotlin.math.sqrt
 
-class Acelerometro(
+data class Acelerometro(
     val disponible: Boolean,
     val x: Float,
     val y: Float,
@@ -67,9 +67,9 @@ fun rememberAcelerometroState(): Acelerometro {
                     val magnitud = sqrt((x * x + y * y + z * z).toDouble()).toFloat()
                     val delta = abs(magnitud - 9.8f)
                     mensaje = when {
-                        delta < 1.0f -> "Reposo"
-                        delta < 3.0f -> "Movimiento leve"
-                        else -> "Movimiento fuerte"
+                        delta < 1.0f -> "Sin movimiento (reposo)"
+                        delta < 3.0f -> "Movimiento leve detectado"
+                        else -> "Movimiento fuerte detectado"
                     }
                 }
 
@@ -102,17 +102,27 @@ fun AcelerometroCard(modifier: Modifier = Modifier) {
     Card(modifier = modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
+                text = "Diagnóstico del dispositivo",
+                style = MaterialTheme.typography.titleSmall
+            )
+            Spacer(Modifier.height(4.dp))
+            Text(
                 text = "Sensor: Acelerómetro",
                 style = MaterialTheme.typography.titleSmall
             )
             Spacer(Modifier.height(8.dp))
             Text(text = "Estado: ${state.mensaje}")
             if (state.disponible) {
+                Spacer(Modifier.height(4.dp))
                 Text(
                     text = "X: ${"%.2f".format(state.x)}  " +
                             "Y: ${"%.2f".format(state.y)}  " +
                             "Z: ${"%.2f".format(state.z)}"
                 )
+                val magnitud = sqrt(
+                    (state.x * state.x + state.y * state.y + state.z * state.z).toDouble()
+                ).toFloat()
+                Text(text = "Magnitud: ${"%.2f".format(magnitud)} m/s²")
             }
         }
     }
