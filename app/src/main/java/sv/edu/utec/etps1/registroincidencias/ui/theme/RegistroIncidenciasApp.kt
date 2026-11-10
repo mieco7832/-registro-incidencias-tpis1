@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,7 +45,7 @@ fun RegistroIncidenciasApp() {
     var titulo by remember { mutableStateOf("") }
     var descripcion by remember { mutableStateOf("") }
     var prioridad by remember { mutableStateOf("") }
-    var mensaje by remember { mutableStateOf(mensajeInicial) }
+    var mensaje by rememberSaveable { mutableStateOf(mensajeInicial) }
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
