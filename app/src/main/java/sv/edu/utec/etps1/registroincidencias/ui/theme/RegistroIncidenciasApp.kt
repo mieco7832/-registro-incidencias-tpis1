@@ -20,7 +20,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -35,16 +34,15 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import sv.edu.utec.etps1.registroincidencias.BuildConfig
 import sv.edu.utec.etps1.registroincidencias.R
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun RegistroIncidenciasApp() {
+fun RegistroIncidenciasApp(
+    vm: IncidenciaViewModel = viewModel()
+) {
     val mensajeInicial = stringResource(R.string.no_record)
     val ctx = LocalContext.current
     val focusManager = LocalFocusManager.current
-
-    var titulo by remember { mutableStateOf("") }
-    var descripcion by remember { mutableStateOf("") }
-    var prioridad by remember { mutableStateOf("") }
     var mensaje by rememberSaveable { mutableStateOf(mensajeInicial) }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -79,8 +77,8 @@ fun RegistroIncidenciasApp() {
             Spacer(modifier = Modifier.height(24.dp))
 
             OutlinedTextField(
-                value = titulo,
-                onValueChange = { titulo = it },
+                value = vm.titulo,
+                onValueChange = vm::actualizarTitulo,
                 label = { Text(stringResource(R.string.title_tag_value)) },
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(
@@ -96,8 +94,8 @@ fun RegistroIncidenciasApp() {
             Spacer(modifier = Modifier.height(12.dp))
 
             OutlinedTextField(
-                value = descripcion,
-                onValueChange = { descripcion = it },
+                value = vm.descripcion,
+                onValueChange = vm::actualizarDescripcion,
                 label = { Text(stringResource(R.string.description_tag_value)) },
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(
@@ -126,8 +124,8 @@ fun RegistroIncidenciasApp() {
             ) {
                 listOf("Alta", "Media", "Baja").forEach { p ->
                     FilterChip(
-                        selected = prioridad == p,
-                        onClick = { prioridad = p },
+                        selected = vm.prioridad == p,
+                        onClick = { vm.seleccionarPrioridad(p) },
                         label = { Text(p) }
                     )
                 }
@@ -138,7 +136,7 @@ fun RegistroIncidenciasApp() {
             Text(
                 text = stringResource(
                     R.string.selected_priority,
-                    prioridad.ifBlank { stringResource(R.string.none) }),
+                    vm.prioridad.ifBlank { stringResource(R.string.none) }),
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.align(Alignment.Start)
             )
@@ -147,9 +145,9 @@ fun RegistroIncidenciasApp() {
 
             Button(
                 onClick = {
-                    mensaje = if (titulo.isNotBlank()) {
-                        val prioridadTexto = if (prioridad.isNotBlank()) " | Prioridad: $prioridad" else ""
-                        ctx.getString(R.string.prepared_report_label, titulo) + prioridadTexto
+                    mensaje = if (vm.titulo.isNotBlank()) {
+                        val prioridadTexto = if (vm.prioridad.isNotBlank()) " | Prioridad: ${vm.prioridad}" else ""
+                        ctx.getString(R.string.prepared_report_label, vm.titulo) + prioridadTexto
                     } else {
                         ctx.getString(R.string.invalid_report_label)
                     }

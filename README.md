@@ -37,6 +37,7 @@ Reporta y da seguimiento a problemas de equipos, infraestructura o servicios.
 - [x] Archivo de `String.xml` implementando logica de constantes
 - [x] Logs para ciclo de vida de la aplicacion
 - [x] Mensaje con RememberSaveable
+- [x] Implementacion de ViewModel
 
 ## Cómo abrir el proyecto en Android Studio
 
